@@ -41,19 +41,19 @@ RUN apk add --no-cache \
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
-        gd \
-        pdo \
-        pdo_mysql \
-        pdo_pgsql \
-        pdo_sqlite \
-        mbstring \
-        zip \
-        exif \
-        pcntl \
-        bcmath \
-        intl \
-        opcache \
-        sockets
+    gd \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    pdo_sqlite \
+    mbstring \
+    zip \
+    exif \
+    pcntl \
+    bcmath \
+    intl \
+    opcache \
+    sockets
 
 # Install Redis extension
 RUN pecl install redis \
@@ -89,16 +89,16 @@ RUN mkdir -p /var/log/supervisor \
     && chown -R $RUNNER_USER:$RUNNER_GROUP $WORKDIR
 
 # Set file limits for WebSocket connections
-RUN echo "www-data soft nofile 65536" >> /etc/security/limits.conf \
+RUN mkdir -p /etc/security \
+    && echo "www-data soft nofile 65536" >> /etc/security/limits.conf \
     && echo "www-data hard nofile 65536" >> /etc/security/limits.conf
 
 # Switch to www-data user for Laravel installation
 USER $RUNNER_USER
 
 # Install Laravel with Reverb
-RUN composer create-project laravel/laravel . --prefer-dist --no-dev --optimize-autoloader \
-    && composer require laravel/reverb pusher/pusher-php-server \
-    && php artisan install:broadcasting --without-node
+RUN composer create-project laravel/laravel . --prefer-dist --no-dev \
+    && composer require laravel/reverb pusher/pusher-php-server
 
 # Remove default .env file (will be provided via volume or environment)
 RUN rm -f .env
@@ -122,4 +122,3 @@ ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Default command
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
