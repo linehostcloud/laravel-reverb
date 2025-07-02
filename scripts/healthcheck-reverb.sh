@@ -86,7 +86,7 @@ check_laravel() {
 # Function to check supervisor processes
 check_supervisor() {
     if command -v supervisorctl > /dev/null 2>&1; then
-        local failed_processes=$(supervisorctl status | grep -v RUNNING | grep -v STARTING | wc -l)
+        local failed_processes=$(supervisorctl -c /etc/supervisor/conf.d/supervisord.conf status | grep -v RUNNING | grep -v STARTING | wc -l)
         if [ "$failed_processes" -eq 0 ]; then
             echo -e "${GREEN}✓ All supervisor processes are running${NC}"
             return 0
