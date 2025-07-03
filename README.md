@@ -19,20 +19,20 @@ Uma solução completa e otimizada para executar **Laravel Reverb** (WebSocket s
 ┌─────────────────────────────────────────────────────────────┐
 │                    Docker Container                         │
 ├─────────────────────────────────────────────────────────────┤
-│  Nginx (Port 80)          │  Laravel Reverb (Port 8080)    │
-│  ├─ Static Files          │  ├─ WebSocket Server           │
-│  ├─ PHP-FPM Proxy         │  ├─ Real-time Broadcasting     │
-│  └─ WebSocket Proxy       │  └─ Event Broadcasting         │
+│  Nginx (Port 80)          │  Laravel Reverb (Port 8080)     │
+│  ├─ Static Files          │  ├─ WebSocket Server            │
+│  ├─ PHP-FPM Proxy         │  ├─ Real-time Broadcasting      │
+│  └─ WebSocket Proxy       │  └─ Event Broadcasting          │
 ├─────────────────────────────────────────────────────────────┤
-│  PHP-FPM (Port 9000)      │  Queue Workers                 │
-│  ├─ Laravel Application   │  ├─ Background Jobs            │
-│  ├─ API Endpoints         │  ├─ Email Processing           │
-│  └─ Web Interface         │  └─ Async Tasks                │
+│  PHP-FPM (Port 9000)      │  Queue Workers                  │
+│  ├─ Laravel Application   │  ├─ Background Jobs             │
+│  ├─ API Endpoints         │  ├─ Email Processing            │
+│  └─ Web Interface         │  └─ Async Tasks                 │
 ├─────────────────────────────────────────────────────────────┤
-│  Scheduler                 │  Redis (Port 6379)            │
-│  ├─ Cron Jobs             │  ├─ Session Storage            │
-│  ├─ Maintenance Tasks     │  ├─ Cache Layer                │
-│  └─ Automated Backups     │  └─ Queue Backend              │
+│  Scheduler                │  Redis (Port 6379)              │
+│  ├─ Cron Jobs             │  ├─ Session Storage             │
+│  ├─ Maintenance Tasks     │  ├─ Cache Layer                 │
+│  └─ Automated Backups     │  └─ Queue Backend               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
